@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 <div class="ahoninmu-progress-notification">
     <div class="progress-content">
         <div class="progress-icon">
-            <?php if ($summary['percentage'] == 100): ?>
+            <?php if ((int)$summary['percentage'] === 100): ?>
                 <span class="icon-trophy">🏆</span>
             <?php else: ?>
                 <span class="icon-task">📝</span>
@@ -24,7 +24,7 @@ if (!defined('ABSPATH')) {
                 Bạn đã hoàn thành <strong><?php echo $summary['completed']; ?>/<?php echo $summary['total']; ?></strong> nhiệm vụ ngày
             </p>
             
-            <?php if ($summary['percentage'] == 100): ?>
+            <?php if ((int)$summary['percentage'] === 100): ?>
                 <p class="progress-congrats">Chúc mừng! Bạn đã hoàn thành tất cả nhiệm vụ hôm nay! 🎉</p>
             <?php endif; ?>
         </div>

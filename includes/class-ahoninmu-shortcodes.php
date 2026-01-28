@@ -74,14 +74,18 @@ class Ahoninmu_Shortcodes {
             'month' => current_time('Y-m')
         ), $atts);
         
+        // Make atts available to template
+        $month = $atts['month'];
+        $limit = intval($atts['limit']);
+        
         $leaderboard_obj = Ahoninmu_Leaderboard::get_instance();
-        $leaders = $leaderboard_obj->get_monthly_leaderboard($atts['month'], intval($atts['limit']));
+        $leaders = $leaderboard_obj->get_monthly_leaderboard($month, $limit);
         
         $current_user_id = get_current_user_id();
         $user_rank = null;
         
         if ($current_user_id) {
-            $user_rank = $leaderboard_obj->get_user_rank($current_user_id, $atts['month']);
+            $user_rank = $leaderboard_obj->get_user_rank($current_user_id, $month);
         }
         
         ob_start();

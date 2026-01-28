@@ -198,8 +198,9 @@ class Ahoninmu_Missions {
             return;
         }
         
-        // Select 10 random missions (or fewer if not enough available)
-        $selected_missions = array_slice($missions, 0, 10);
+        // Select configured number of random missions (or fewer if not enough available)
+        $missions_per_day = get_option('ahoninmu_missions_per_day', 10);
+        $selected_missions = array_slice($missions, 0, intval($missions_per_day));
         
         // Insert daily missions
         $order = 1;

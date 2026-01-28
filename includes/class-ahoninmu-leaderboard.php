@@ -107,6 +107,11 @@ class Ahoninmu_Leaderboard {
             $year_month = current_time('Y-m');
         }
         
+        // Validate year_month format
+        if (!preg_match('/^\d{4}-\d{2}$/', $year_month)) {
+            $year_month = current_time('Y-m');
+        }
+        
         $query = "
             SELECT 
                 r.*,

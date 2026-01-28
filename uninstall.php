@@ -25,6 +25,13 @@ if ($timestamp) {
     wp_unschedule_event($timestamp, 'ahoninmu_daily_reset');
 }
 
-// Clear any transients
+// Clear any transients and caches
 global $wpdb;
-$wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '%ahoninmu%'");
+$wpdb->query($wpdb->prepare(
+    "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+    $wpdb->esc_like('_transient_ahoninmu_') . '%'
+));
+$wpdb->query($wpdb->prepare(
+    "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+    $wpdb->esc_like('_transient_timeout_ahoninmu_') . '%'
+));

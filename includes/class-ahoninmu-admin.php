@@ -117,6 +117,11 @@ class Ahoninmu_Admin {
     public function leaderboard_page() {
         $year_month = isset($_GET['month']) ? sanitize_text_field($_GET['month']) : current_time('Y-m');
         
+        // Validate year_month format
+        if (!preg_match('/^\d{4}-\d{2}$/', $year_month)) {
+            $year_month = current_time('Y-m');
+        }
+        
         $leaderboard_obj = Ahoninmu_Leaderboard::get_instance();
         $leaders = $leaderboard_obj->get_monthly_leaderboard($year_month, 100);
         

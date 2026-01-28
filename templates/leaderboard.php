@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 
 <div class="ahoninmu-leaderboard-container">
     <h2 class="ahoninmu-leaderboard-title">
-        Bảng xếp hạng tháng <?php echo date_i18n('m/Y', strtotime($atts['month'] . '-01')); ?>
+        Bảng xếp hạng tháng <?php echo date_i18n('m/Y', strtotime($month . '-01')); ?>
     </h2>
     
     <?php if ($current_user_id && $user_rank): ?>
@@ -38,12 +38,9 @@ if (!defined('ABSPATH')) {
                     <?php foreach ($leaders as $index => $leader): ?>
                         <?php 
                         $rank = $index + 1;
-                        $is_current_user = ($current_user_id == $leader->user_id);
-                        $is_first = ($rank == 1);
-                        $row_class = '';
-                        if ($is_current_user) {
-                            $row_class .= ' current-user';
-                        }
+                        $is_current_user = ($current_user_id === $leader->user_id);
+                        $is_first = ($rank === 1);
+                        $row_class = $is_current_user ? ' current-user' : '';
                         if ($is_first) {
                             $row_class .= ' first-place';
                         }
@@ -52,9 +49,9 @@ if (!defined('ABSPATH')) {
                             <td class="col-rank">
                                 <?php if ($is_first): ?>
                                     <span class="rank-badge first">🥇 #1</span>
-                                <?php elseif ($rank == 2): ?>
+                                <?php elseif ($rank === 2): ?>
                                     <span class="rank-badge second">🥈 #2</span>
-                                <?php elseif ($rank == 3): ?>
+                                <?php elseif ($rank === 3): ?>
                                     <span class="rank-badge third">🥉 #3</span>
                                 <?php else: ?>
                                     <span class="rank-number">#<?php echo $rank; ?></span>
